@@ -1,0 +1,101 @@
+<div ng-controller="FacturaController" class="container">
+    <div id="">
+
+    	<div id="FacturaInput" >
+    		<label>Código:</label>
+    		<input  ng-model="item.ingreso"> </input>
+    		<input type="submit" ng-click="addItem()" class="btn btn-success" value="Agregar"></input> 
+    		<button id="BotonCancelar" type="button" class = "btn btn-danger pull-right" ng-click="CancelAll()" >Cancelar</button>   
+    		<button type="button" class = "btn btn-primary pull-right" data-toggle="modal" data-target="#PopFactura" >Facturar</button>  		
+    		
+    	</div>
+
+    	<div id="TablaFactura" class = "container">
+			<table id="" class="table table-striped">
+		      <tr>
+		      	<th>
+		      		Código
+		      	</th>
+		        <th>
+		          Nombre
+		        </th>
+		        <th>
+		          Cantidad
+		        </th>
+		        <th>
+		          Precio
+		        </th>
+		        <th>
+		        </th>
+		      </tr>
+
+		      <tr ng-repeat="product in products">
+		      	<td >
+		      		<label readonly="" ng-model="item.codigo"> {{product.code}}</label>
+		      	</td>
+		      	<td>
+		      		<label ng-model="item.nombre">{{product.name}}</label>
+		      	</td>
+		      	<td>
+		      		<button ng-click="LowerItem(product)" class="botonesFactura btn glyphicon glyphicon-menu-down"></button>
+		      		<input readonly="" ng-model="item.cantidad" type="number" value={{product.currentAmount}} min="1" max={{product.quantity}} id="facturaCantidad"></input>
+		      		<button ng-click="IncreaseItem(product)" class="botonesFactura btn glyphicon glyphicon-menu-up"></button>
+		      	</td>
+		      	<td>
+		      		<label ng-model="item.precio">{{product.price  * product.currentAmount}}</label>
+		      	</td>
+		      	<td>
+		      		<label type="submit" ng-click="deleteItem(product)" class="btn btn-danger glyphicon glyphicon-remove"></label>
+		      	</td>
+		      </tr>
+		    </table>   
+		</div>    
+
+		<div class="modal" id="PopFactura" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div id="FacturaPrint" class="modal-body ">
+		        	<h4 class="FacturaCentrado">Central de Motos</h4>
+		        	<label>{{$sessionStorage.currentUser.username}}</label>
+
+		          <table>
+					<tr ng-repeat = "n in products">
+						<td class="espacioTotal">
+							<label>{{n.name}}</label>
+						</td>
+						<td class="espacioTotal">
+							<label>{{n.currentAmount}}</label>
+						</td>
+						<td class="espacioTotal">
+							<label>{{n.price * n.currentAmount}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="espacioTotal">Subtotal:</td>
+						<td></td>
+						<td ng-init="putSubTotal()" ng-model="factura.subtotal">{{factura.subtotal}}</td>
+					</tr>
+					<tr>
+						<td class="espacioTotal" ng-model = "factura.impuesto">Impuesto:</td>
+						<td></td>
+						<td>{{factura.subtotal * 0.15}}</td>
+					</tr>
+					<tr>
+						<td class="espacioTotal">Total:</td>
+						<td></td>
+						<td>{{factura.subtotal + (factura.subtotal*0.15)}}</td>
+					</tr>
+				</table>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="reduccionInventario('FacturaPrint')">Comprar</button>
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		</div>
+    </div>
+</div>

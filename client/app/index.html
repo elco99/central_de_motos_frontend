@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html ng-app="AngularScaffold">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Central de Motos</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="styles/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="styles/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body >
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller = "HomeController">
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a ng-click="goHome()"><img  src = "imagenes/img1.png" id = "Imagen" class ="navbar-brand"></img></a>
+
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right" >
+                  <li ng-cloak ng-show="isCliente()" >
+                      <button id= "shopping_cart_button" class="btn btn-danger glyphicon glyphicon-shopping-cart"/>
+                  </li>
+                  <li>
+                    <div class="pull-right">
+                      <form class="navbar-form" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="search_bar.tags" placeholder="write your shit here" name="srch-term" id="srch-term">
+                            <div class="input-group-btn">
+                                <button class="btn btn-danger" type="submit" ng-click="searchByTags(search_bar)"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+                  </li>
+                  <li >
+                      <a class="btn btn-link" ng-click = "goAbout()">Quienes Somos</a>
+                  </li>
+                  <li>
+                      <a class="btn btn-link" ng-click = "goService()">Productos</a>
+                  </li>
+                  <li>
+                      <a class="btn btn-link" ng-click = "goContact()">Contáctenos</a>
+                  </li>
+                  <li ng-cloak ng-show="isVendedor()">
+                      <a class="btn" ng-click="goFactura()">Factura</a>
+                  </li>
+                  <li class="dropdown" ng-cloak ng-show="isAdmin()">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a class="btn" ng-click="goGestionUser()">Gestión de usuarios</a>
+                          </li>
+                          <li>
+                              <a class="btn" ng-click="goGestionProductos()">Gestión de productos</a>
+                          </li>
+                          <li>
+                              <a class="btn" ng-click="goFactura()">Factura</a>
+                          </li>
+                          <li>
+                              <a class="btn"  ng-click="goEstadisticas()">Estadísticas</a>
+                          </li>
+
+                      </ul>
+                  </li>
+
+                  <!--LOGIN-->
+                  <li ng-cloak ng-show="!isLogged()"  class="dropdown" >
+                    <a  class="dropdown-toggle" href="#" data-toggle="dropdown">Conectarse<strong class="caret"></strong></a>
+                    <div class="dropdown-menu" id= "login_container">
+                      <form method="post">
+                        <input id="username" ng-model = "user.username"></input>
+                        <input id="password" type="password" ng-model= "user.password"></input>
+                        <input class="btn btn-danger" type="submit" value="Conectarse" ng-click="login()" />
+                      </form>
+                    </div>
+                  </li>
+                  <li ng-cloak ng-show="isLogged()">
+                    <button class="btn btn-danger" id="logout_button"  ng-click="logout()">Desconectar</button>
+                  </li>
+                  <!--LOGIN/LOGOUT-->
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+    <div ui-view>  </div> <!--views-->
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; My little pony 2015</p>
+            </div>
+        </div>
+    </footer>
+  </body>
+
+  <!-- bower:js -->
+
+  <script src="/jquery/dist/jquery.js"></script>
+
+  <script src="/angular/angular.js"></script>
+
+  <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+
+  <script src="/bootstrap-css/js/bootstrap.min.js"></script>
+
+  <script src="/ngstorage/ngStorage.js"></script>
+
+  <script src="/bootstrap/dist/js/bootstrap.js"></script>
+
+  <!-- endinject -->
+
+  <script src="app.js"></script>
+
+  <!-- inject:js -->
+  <script src="scripts/controllers/HomeController.js"></script>
+  <script src="scripts/controllers/AddProductController.js"></script>
+  <script src="scripts/controllers/CatalogController.js"></script>
+  <script src="scripts/controllers/AddUsersController.js"></script>
+  <script src="scripts/services/HomeService.js"></script>
+  <script src="scripts/controllers/FacturaController.js"></script>
+  <script src="scripts/controllers/StatsController.js"></script>
+
+  <!-- endinject -->
+
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+  <script src="scripts/controllers/highcharts.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+
+
+  <script>
+  $('.carousel').carousel({
+      interval: 5000 //changes the speed
+  })
+  </script>
+</html>

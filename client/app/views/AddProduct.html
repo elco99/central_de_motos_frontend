@@ -1,0 +1,169 @@
+<div ng-controller="AddProductController" class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div >
+            <h1 class="page-header">Productos</h1>
+            <ol class="breadcrumb">
+                <li><a ng-click="goHome()">Inicio</a>
+                </li>
+                <li class="active">Gestionar Productos</li>
+            </ol>
+            
+        </div>
+         <!-- Service Tabs -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <ul id="myTab" class="nav nav-tabs nav-justified">
+                    <li class="active"><a data-target="#agregarProduct" data-toggle="tab">Agregar Producto</a>
+                    </li>
+                    <li class=""><a class="btn" data-target="#modificarProduct" ng-click="getFetch()" data-toggle="tab">Modificar Producto</a>
+                    </li>
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="agregarProduct">
+                        <div class="row">
+					        <!-- Projects Row -->
+					        <div class="col-md-12 col-sm-12">
+					            <label>URL Imagen</label>
+					            <input ng-model="producto.image" type="text" >
+					        </div>
+					        <div class="col-md-12 col-sm-12">
+					            <label>Codigo</label>
+					            <input ng-model="producto.code" type="text" >
+					        </div>
+					        <div class="col-md-12 col-sm-12">
+					            <label>Nombre</label>
+					            <input ng-model="producto.name" type="text" ></input>
+					        </div>
+					        <div class="col-md-12 col-sm-12">
+					            <label>Descripción</label>
+					            <input ng-model="producto.description" type="text" ></input>
+					        </div>
+					        <div class="col-md-12 col-sm-12">
+					            <label>Tags</label>
+					            <input ng-model="producto.tags" type="text" ></input>
+					        </div>
+					        <div class="col-md-12 col-sm-12">
+				            	<label>Precio</label>
+				            	<input ng-model="producto.price" type="number" min="1"></input>
+				        	</div>
+				        	<div class="col-md-12 col-sm-12">
+					            <label>Cantidad</label>
+					            <input ng-model="producto.quantity" type="number" min="0"></input>
+				        	</div>
+				        	<div class="col-md-12 col-sm-12">
+				        		<button ng-click="createProduct()" class="btn btn-danger">Agregar</button>
+					        </div>
+					    </div >
+                    </div>
+                    <div class="tab-pane fade" id="modificarProduct">
+                    	<div class = "container">
+							<table id="TableGestion" class="table table-striped">
+						      <tr>
+						      	<th ng-if ="false">
+						      		ID
+						      	</th>
+						      	<th ng-if="false">
+						      		Codigo
+						      	</th>
+						        <th>
+						          Imagen
+						        </th>
+						        <th>
+						          Nombre
+						        </th>
+						        <th>
+						          Descripción
+						        </th>
+						        <th>
+						          Tags
+						        </th>
+						        <th>
+						          Precio
+						        </th>
+						        <th>
+						          Cantidad
+						        </th>
+						        <th>
+						          Estado
+						        </th>
+						        <th>
+						        </th>
+						      </tr>
+						      <tr>
+						      	<td ng-if="false">
+						      		<input readonly="" ng-model="productoModif.id"> </input>
+						      	</td>
+						      	<td ng-if="false">
+						      		<input type="text" ng-model="productoModif.code"> </input>
+						      	</td>
+						      	<td>
+						      		<input ng-model="productoModif.image" type = "text"> </input>
+						      	</td>
+						      	<td>
+						      		<input ng-model="productoModif.name"  type = "text"> </input>
+						      	</td>
+						      	<td>
+						      		<input ng-model="productoModif.description" class="input_gestion_productos" type = "text"> </input>
+						      	</td>
+						      	<td>
+						      		<input ng-model="productoModif.tags" type = "text"> </input>
+						      	</td>
+						      	<td>
+						      		<input ng-model="productoModif.price" class="input_gestion_productos" type = "number"> </input>
+						      	</td>
+						      	<td>
+						      		<input ng-model="productoModif.quantity" class="input_gestion_productos" type = "number"> </input>
+						      	</td>
+						      	<td>
+						      		<input ng-model="productoModif.state"  class="input_gestion_productos" type = "text"> </input>
+						      	</td>
+						      	<td>
+						      		<input type = "submit" ng-click="saveProductChanges()" class="btn btn-primary" value="Guardar"></input>
+						      	</td>
+						      </tr>
+						      <tr ng-repeat="product in products">
+						      	<td ng-if ="false">
+						      		{{product._id}}/
+						      	</td>
+						      	<td ng-if="false">
+						          {{product.code}}
+						        </td>
+						        <td>
+						          {{product.image}}
+						        </td>
+						        <td>
+						          {{product.name}}
+						        </td>
+						        <td>
+						          {{product.description}}
+						        </td>
+						        <td>
+						          {{product.tags}}
+						        </td>
+						        <td>
+						          {{product.price}}
+						        </td>
+						        <td>
+						          {{product.quantity}}
+						        </td>
+						        <td>
+						          {{product.state}}
+						        </td>
+						        <td>
+						          <button ng-click="show_modificar(product)" class="btn btn-danger">Modificar</button>
+						          
+						        </td>
+						      </tr>
+						    </table>   
+						</div>                     
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+        
+</div>
