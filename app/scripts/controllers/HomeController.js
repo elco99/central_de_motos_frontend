@@ -68,7 +68,7 @@ angular.module('AngularScaffold.Controllers')
         $scope.SessionCurrentUser = {};
         console.log(  $scope.SessionCurrentUsers)
       }).catch(function(err){
-        alert(err.data.error + " " + err.data.message);
+        //alert(err.data.error + " " + err.data.message);
       });
     }
 
