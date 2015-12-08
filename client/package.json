@@ -12,8 +12,9 @@
     "main-bower-files": "^2.9.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "test"
+   "scripts": {
+    "start": "node server",
+    "postinstall": "bower install && gulp index"
   },
   "repository": {
     "type": "git",
