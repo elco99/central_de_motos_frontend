@@ -66,7 +66,7 @@ angular.module('AngularScaffold.Controllers')
       HomeService.Login($scope.user).then(function(response){
         $sessionStorage.currentUser = response.data;
         $scope.SessionCurrentUser = {};
-        console.log(  $scope.SessionCurrentUsers)
+        //console.log(  $scope.SessionCurrentUsers)
       }).catch(function(err){
         //alert(err.data.error + " " + err.data.message);
       });
