@@ -6,15 +6,21 @@ angular.module('AngularScaffold.Services', []);
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('home');
 	$stateProvider
-		        .state('home', {
-		            url: '/home',
-								params:{content:undefined},
-		            templateUrl: '/views/home.html',
-		            controller: 'HomeController'
-		        })
+        .state('home', {
+            url: '/home',
+						params:{content:undefined},
+            templateUrl: '/views/home.html',
+            controller: 'HomeController'
+        })
 				.state('services', {
 						url: '/services',
 						templateUrl: 'views/services.html',
+						params:{content:undefined},
+						controller: 'HomeController',
+				})
+				.state('shopping', {
+						url: '/shopping_cart',
+						templateUrl: 'views/shopping_cart.html',
 						params:{content:undefined},
 						controller: 'HomeController',
 				})

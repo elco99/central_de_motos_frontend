@@ -28,6 +28,10 @@ angular.module('AngularScaffold.Controllers')
       $state.go('home');
     };
 
+    $scope.goShopping = function(){
+      $state.go('shopping');
+    };
+
     $scope.goEstadisticas = function(){
       $state.go('estadisticas');
     };

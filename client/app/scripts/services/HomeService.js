@@ -1,7 +1,7 @@
 angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 	function($http){
 		$http.defaults.withCredentials = true;
-		var baseUrl = 'http://danycheong:8000/';//https://angular-scaffold-backend.herokuapp.com/
+		var baseUrl = 'http://localhost:8000/';//https://angular-scaffold-backend.herokuapp.com/
 		return {
 			GetUsers: function(){
 				return $http.get(baseUrl + "v1/users");
@@ -44,6 +44,12 @@ angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 			},
 			searchByTag: function(payload){
 				return $http.post(baseUrl + 'v1/product/search',payload);
+			},
+			fill_cart: function(payload){
+				return $http.post(baseUrl + 'v1/shopping_cart',payload);
+			},
+			add_bought_item: function(payload){
+				return $http.post(baseUrl +'v1/shoppin_cart/add',payload);
 			}
 
 		};
