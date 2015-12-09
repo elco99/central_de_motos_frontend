@@ -28,6 +28,14 @@ angular.module('AngularScaffold.Controllers')
       $state.go('home');
     };
 
+    $scope.goGestionVentas = function(){
+      $state.go('gestionventa');
+    };
+
+    $scope.goShopping = function(){
+      $state.go('shopping');
+    };
+
     $scope.goEstadisticas = function(){
       $state.go('estadisticas');
     };
@@ -66,7 +74,49 @@ angular.module('AngularScaffold.Controllers')
       HomeService.Login($scope.user).then(function(response){
         $sessionStorage.currentUser = response.data;
         $scope.SessionCurrentUser = {};
-        //console.log(  $scope.SessionCurrentUsers)
+      }).catch(function(err){
+        alert(err.data.error + " " + err.data.message);
+      });
+    }
+
+    $scope.aceptarDeposito = function(user){
+      HomeService.aceptar_deposito(user).then(function(response){
+          HomeService.sendConfirmationMail(user).then(function(response){
+            HomeService.reduceInventory(user).then(function(response){
+              HomeService.deleteCart(user).then(function(response){
+
+              }).catch(function(err){
+                alert('Error from deleting cart')
+              });
+            }).catch(function(err){
+              alert('Error from deleting products')
+            });
+
+          }).catch(function(err){
+            alert('Error from mail')
+          });
+
+      }).catch(function(err){
+
+      });
+      $state.reload();
+    }
+    $scope.denegarDeposito = function(user){
+      HomeService.aceptar_deposito(user).then(function(response){
+          HomeService.sendDenialMail(user).then(function(response){
+
+          }).catch(function(err){
+            alert('Error from mail')
+          });
+          $state.reload();
+      }).catch(function(err){
+
+      });
+    }
+
+    $scope.confirmationTable = function(){
+      HomeService.getDepositedUsers().then(function(response){
+        $scope.users = response.data;
       }).catch(function(err){
         //alert(err.data.error + " " + err.data.message);
       });

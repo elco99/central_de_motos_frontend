@@ -44,7 +44,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right" >
                   <li ng-cloak ng-show="isCliente()" >
-                      <button id= "shopping_cart_button" class="btn btn-danger glyphicon glyphicon-shopping-cart"/>
+                      <button ng-click= "goShopping()" id= "shopping_cart_button" class="btn btn-danger glyphicon glyphicon-shopping-cart"/>
                   </li>
                   <li>
                     <div class="pull-right">
@@ -78,6 +78,9 @@
                           </li>
                           <li>
                               <a class="btn" ng-click="goGestionProductos()">Gestión de productos</a>
+                          </li>
+                          <li>
+                              <a class="btn" ng-click="goGestionVentas()">Gestión de Ventas</a>
                           </li>
                           <li>
                               <a class="btn" ng-click="goFactura()">Factura</a>
