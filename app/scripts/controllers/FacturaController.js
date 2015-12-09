@@ -14,7 +14,64 @@ angular.module('AngularScaffold.Controllers')
   $scope.show_admin = true;
   $scope.show_bill= false;
 
+  $scope.uploadImage = function(){
+
+      var elm = document.getElementById('imagen'),
+      img = elm.files[0],
+      filename = img.name,
+      filesize = img.size;
+      var reader = new FileReader(),binary,base64     ;
+      reader.addEventListener('loadend', function(){
+        binary = reader.result;
+        base64 = btoa(binary);
+        var imgbase64 = {
+          base64 : base64
+        }
+        //$scope.sendM()
+        HomeService.send_mail(imgbase64).then(function(response){
+          alert(response.data)
+        }).catch(function(err){
+          alert('Error from cart')
+        });
+      }, false);
+
+
+      HomeService.updateDeposited($scope.$sessionStorage.currentUser).then(function(response){
+        alert(response.data)
+      }).catch(function(err){
+        alert('Error from cart')
+      });
+        reader.readAsBinaryString(img);
+    /*
+      reader.readAsBinaryString(img);*/
+
+
+   }
+   $scope.wasBought = function(){
+     console.log($sessionStorage.currentUser)
+     return  $sessionStorage.currentUser.bought_cart;
+   }
+
+
+   $scope.habilitar_upload_image = function() {
+
+     HomeService.updateBought($scope.$sessionStorage.currentUser).then(function(response){
+        $scope.$sessionStorage.currentUser.bought_cart = true;
+        alert(response.data)
+      }).catch(function(err){
+        alert('Error from cart')
+      });
+   }
   $scope.deleteItem = function(product){
+    var params = {
+      username : $scope.$sessionStorage.currentUser.username,
+      product_code : product.code
+    }
+    HomeService.remove_from_cart(params).then(function(response){
+      alert(response.data)
+    }).catch(function(err){
+      alert('Error deleting product from cart')
+    });
      $scope.products.splice($scope.products.indexOf(product),1);
      $scope.putSubTotal();
   }

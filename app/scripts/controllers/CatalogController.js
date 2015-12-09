@@ -19,11 +19,10 @@ angular.module('AngularScaffold.Controllers')
       item : product,
       current_user : $scope.$sessionStorage.currentUser
     }
-    console.log(object)
     HomeService.add_bought_item(object).then(function(response){
       console.log(response.data)
     }).catch(function(err){
-      alert('Error fetching users')
+      alert('Error adding product')
     });
 
   }

@@ -18,6 +18,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 						params:{content:undefined},
 						controller: 'HomeController',
 				})
+				.state('gestionventa', {
+						url: '/GestionarVenta',
+						templateUrl: 'views/gestionVenta.html',
+						params:{content:undefined},
+						controller: 'HomeController',
+				})
 				.state('shopping', {
 						url: '/shopping_cart',
 						templateUrl: 'views/shopping_cart.html',

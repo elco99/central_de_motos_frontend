@@ -1,7 +1,7 @@
 angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 	function($http){
 		$http.defaults.withCredentials = true;
-		var baseUrl = 'http://localhost:8000/';//https://angular-scaffold-backend.herokuapp.com/
+		var baseUrl = 'https://centraldemotosbackend.herokuapp.com/';//https://angular-scaffold-backend.herokuapp.com/
 		return {
 			GetUsers: function(){
 				return $http.get(baseUrl + "v1/users");
@@ -18,8 +18,20 @@ angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 			GetAllProduct: function(){
 				return $http.get(baseUrl + 'v1/product');
 			},
+			getDepositedUsers: function(){
+				return $http.post(baseUrl + 'v1/admin/deposited');
+			},
+			aceptar_deposito: function(payload){
+				return $http.put(baseUrl + 'v1/admin/aceptar_deposito',payload);
+			},
 			fetchGet: function(){
 				return $http.get(baseUrl + 'v1/product/fetch');
+			},
+			updateBought: function(payload){
+				return $http.put(baseUrl + 'v1/shopping_cart/bought',payload);
+			},
+			updateDeposited: function(payload){
+				return $http.put(baseUrl + 'v1/shopping_cart/deposited',payload);
 			},
 			AddItem: function(payload){
 				return $http.post(baseUrl + 'v1/factura/add',payload);
@@ -47,6 +59,24 @@ angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 			},
 			fill_cart: function(payload){
 				return $http.post(baseUrl + 'v1/shopping_cart',payload);
+			},
+			send_mail: function(payload){
+				return $http.post(baseUrl + 'v1/shopping_cart/sendMail',payload);
+			},
+			sendConfirmationMail: function(payload){
+				return $http.post(baseUrl + 'v1/admin/sendMail',payload);
+			},
+			sendDenialMail: function(payload){
+				return $http.post(baseUrl + 'v1/admin/sendDenialMail',payload);
+			},
+			deleteCart: function(payload){
+				return $http.put(baseUrl + 'v1/admin/deleteCart',payload);
+			},
+			reduceInventory: function(payload){
+				return $http.put(baseUrl + 'v1/admin/reducir',payload);
+			},
+			remove_from_cart: function(payload){
+				return $http.post(baseUrl + 'v1/shopping_cart/delete_item',payload);
 			},
 			add_bought_item: function(payload){
 				return $http.post(baseUrl +'v1/shoppin_cart/add',payload);

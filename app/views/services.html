@@ -26,10 +26,13 @@
                         <input readonly="" type="number" value={{n.currentAmount}} min="1" max={{n.quantity}} id="facturaCantidad"></input>
                         <button ng-click="IncreaseItem(n)" class="botonesFactura btn glyphicon glyphicon-menu-up"></button>
                         <!--<input  id ="item_amount" type="number" min='1' max={{n.quantity}} ></input> -->
-                        <button ng-cloak ng-show ="isCliente()"
-                                class= "btn btn-danger glyphicon glyphicon-shopping-cart"
-                                ng-click ="add_to_cart(n)"
-                                ></button>
+                        <span ng-click ="add_to_cart(n)" class ="btn btn-danger ">Add to cart
+                          <label ng-cloak ng-show ="isCliente()"
+                                  class= "glyphicon glyphicon-shopping-cart"
+
+                                  ></label>
+                        </span>
+
                     </div>
                 </div>
             </div>

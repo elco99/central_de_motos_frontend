@@ -9,6 +9,41 @@
 
     	</div>
       -->
+      <div>
+          <button type="submit" data-target= "#PopCart" data-toggle="modal" class="btn btn-danger">Realizar Compra</button>
+          <div class="modal" id="PopCart" role="dialog">
+      		    <div class="modal-dialog">
+
+                <div class="modal-header">
+                  <label>Compra de {{$sessionStorage.currentUser.username}}</label>
+                </div>
+      		      <!-- Modal content-->
+      		      <div class="modal-content">
+      		        <div id="FacturaPrint" class="modal-body ">
+      		        	<h4 class="FacturaCentrado">Central de Motos</h4>
+                      <p>Si esta seguro de realizar esta compra confirme este mensaje y deposite el total en xxxxxxxxxxxx y luego sube una imagen del comprobante del deposito en el espacio habilitado dentro de su carrito de compra</p>
+
+      		        </div>
+      		        <div class="modal-footer">
+      		          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="habilitar_upload_image()">Comprar</button>
+      		          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      		        </div>
+      		      </div>
+      		    </div>
+      		</div>
+          <!--
+          abrir la ventana para aceptar la compra junto con su total y subtotal
+          -->
+      </div>
+      <div ng-cloack ng-show="wasBought()">
+        <label>Seleccione la imagen del comprobante del deposito:</label>
+        <div>
+          <input type="file" id = "imagen" accept="image/*">
+        </div>
+        <div>
+          <label type="submit" ng-click="uploadImage()" class="btn btn-danger">Enviar</label>
+        </div>
+      </div>
     	<div id="tabla_shopping_cart" class = "container">
 			<table id="" class="table table-striped">
 		      <tr>
@@ -41,7 +76,7 @@
 
 		      	</td>
 		      	<td>
-		      		<label   readonly="" ng-model="item.precio">{{product.price  * product.currentAmount}}</label>
+		      		<label   readonly="" ng-model="item.precio">{{product.price  * product.quantity}}</label>
 		      	</td>
 		      	<td>
 		      		<label type="submit" ng-click="deleteItem(product)" class="btn btn-danger glyphicon glyphicon-remove"></label>
