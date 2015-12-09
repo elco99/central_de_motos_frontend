@@ -74,6 +74,7 @@ angular.module('AngularScaffold.Controllers')
       HomeService.Login($scope.user).then(function(response){
         $sessionStorage.currentUser = response.data;
         $scope.SessionCurrentUser = {};
+<<<<<<< HEAD:app/scripts/controllers/HomeController.js
       }).catch(function(err){
         alert(err.data.error + " " + err.data.message);
       });
@@ -117,6 +118,9 @@ angular.module('AngularScaffold.Controllers')
     $scope.confirmationTable = function(){
       HomeService.getDepositedUsers().then(function(response){
         $scope.users = response.data;
+=======
+        //console.log(  $scope.SessionCurrentUsers)
+>>>>>>> 657f90aa19387dd757f1f362055c052c2e9102ba:app/scripts/controllers/HomeController.js
       }).catch(function(err){
         //alert(err.data.error + " " + err.data.message);
       });
