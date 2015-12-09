@@ -118,7 +118,7 @@ angular.module('AngularScaffold.Controllers')
       HomeService.getDepositedUsers().then(function(response){
         $scope.users = response.data;
       }).catch(function(err){
-        //alert(err.data.error + " " + err.data.message);
+        alert(err.data.error + " " + err.data.message);
       });
     }
 

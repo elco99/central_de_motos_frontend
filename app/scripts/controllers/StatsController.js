@@ -79,7 +79,7 @@ angular.module('AngularScaffold.Controllers')
             data: $scope.cantidad_producto
         }]
     });
-    };
+};
 
   //$scope.graficaInventario();
 
