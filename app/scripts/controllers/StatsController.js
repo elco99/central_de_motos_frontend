@@ -20,7 +20,6 @@ angular.module('AngularScaffold.Controllers')
     });
   }
 
-  $scope.getFetch();
 
   $scope.graficaInventario = function () {
     $('#graph1').highcharts({
