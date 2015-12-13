@@ -89,7 +89,7 @@ angular.module('AngularScaffold.Controllers')
             data: $scope.cantidad_producto
         }]
     });
-    };
+};
 
 $scope.graficaBestSeller = function () {
     $('#graph2').highcharts({

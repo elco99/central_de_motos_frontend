@@ -1,0 +1,56 @@
+<div ng-controller="HomeController" class="container" ng-init = "confirmationTable()">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div >
+            <h1 class="page-header">Gestion Venta de Productos</h1>
+            <ol class="breadcrumb">
+                <li><a ng-click="goHome()">Inicio</a>
+                </li>
+                <li class="active">Gestionar Venta de Productos</li>
+            </ol>
+
+        </div>
+         <!-- Service Tabs -->
+        <div class="row">
+            <div class="col-lg-12">
+
+							<table id="TableGestionCompra" class="table table-striped">
+						      <tr>
+						        <th>
+						          Nombre
+						        </th>
+						        <th>
+						          Usuario
+						        </th>
+                    <th>
+						          Email
+						        </th>
+						        <th>
+						        </th>
+                    <th>
+						        </th>
+						      </tr>
+
+						      <tr ng-repeat="user in users">
+						        <td>
+						          {{user.name}}
+						        </td>
+						        <td>
+						          {{user.username}}
+						        </td>
+                    <td>
+						          {{user.email}}
+						        </td>
+						        <td>
+						          <button ng-click="aceptarDeposito(user)" class="btn btn-danger">Confirmar</button>
+						        </td>
+                    <td>
+						          <button ng-click="denegarDeposito(user)" class="btn btn-danger">Denegar</button>
+						        </td>
+						      </tr>
+						    </table>
+						</div>
+
+        </div>
+
+</div>
