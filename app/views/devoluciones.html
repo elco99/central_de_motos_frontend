@@ -1,0 +1,67 @@
+<div ng-controller="DevolucionController" class="container">
+
+	<!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Devoluciones</h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a ng-click="goHome()">Inicio</a>
+                </li>
+                <li class ="active">
+                   Devoluciones
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div id="">
+
+    	<div id="FacturaInput" >
+    		<label>Código:</label>
+    		<input  ng-model="item.ingreso"> </input>
+    		<input type="submit" ng-click="addItem()" class="btn btn-success" value="Buscar"></input> 
+    		<input id="RadioComprar" ng-model="radio_return" checked="checked" type="radio" name="tipo" value="Compra" >Compra</input>
+    		<input id="RadioVender" ng-model="radio_return" type="radio" name="tipo" value="Venta"  >Venta</input>    		
+    	</div>
+
+    	<div id="TablaFactura" class = "container">
+			<table id="" class="table table-striped">
+		      <tr>
+		      	<th>
+		      		Código
+		      	</th>
+		        <th>
+		          Nombre
+		        </th>
+		        <th>
+		          Cantidad
+		        </th>
+		        <th>
+		        </th>
+		        <th>
+		        </th>
+		      </tr>
+
+		      <tr ng-repeat="product in products">
+		      	<td >
+		      		<label readonly="" ng-model="item.codigo"> {{product.code}}</label>
+		      	</td>
+		      	<td>
+		      		<label ng-model="item.nombre">{{product.name}}</label>
+		      	</td>
+		      	<td>
+		      		<button ng-click="LowerItem(product)" class="botonesFactura btn glyphicon glyphicon-menu-down"></button>
+		      		<input readonly="" ng-model="item.cantidad" type="number" value={{product.currentAmount}} min="1" max={{product.quantity}} id="facturaCantidad"></input>
+		      		<button ng-click="IncreaseItem(product)" class="botonesFactura btn glyphicon glyphicon-menu-up"></button>
+		      	</td>
+		      	<td>
+		      		<label type="submit" ng-click="updateItem(product)" class="btn btn-danger">Devolver</label>
+		      	</td>
+		      	<td>
+		      		<label type="submit" ng-click="clearItem(product)" class="btn btn-danger glyphicon glyphicon-remove"></label>
+		      	</td>
+		      </tr>
+		    </table>   
+		</div>    
+    </div>
+</div>
