@@ -73,7 +73,7 @@ angular.module('AngularScaffold.Controllers')
 
   $scope.saveUserChanges = function(){
     HomeService.SaveUserChanges($scope.userModif).then(function(response){
-      $scope.users = response.data;
+      $scope.userModif = {};
 
     }).catch(function(err){
     });

@@ -78,6 +78,12 @@ angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 			remove_from_cart: function(payload){
 				return $http.post(baseUrl + 'v1/shopping_cart/delete_item',payload);
 			},
+			updateReturnProductBuy:function(payload){
+				return $http.put(baseUrl + 'v1/admin/devolucionCompra',payload);
+			},
+			updateReturnProductSell:function(payload){
+				return $http.put(baseUrl + 'v1/admin/devolucionVenta',payload);
+			},
 			add_bought_item: function(payload){
 				return $http.post(baseUrl +'v1/shoppin_cart/add',payload);
 			}
