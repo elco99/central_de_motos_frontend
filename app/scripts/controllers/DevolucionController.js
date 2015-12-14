@@ -12,13 +12,16 @@ angular.module('AngularScaffold.Controllers')
 
   $scope.updateItem = function(product){
     if ($scope.radio_return === "Compra") {
+
       ProductService.updateReturnProductBuy(product).then(function(response){
+        $scope.clearItem(product);
         alert("Se devolvio exitosamente!")
       }).catch(function(err){
 
       });
     }else{
       ProductService.updateReturnProductSell(product).then(function(response){
+        $scope.clearItem(product);
         alert("Se devolvio exitosamente!")
       }).catch(function(err){
 
@@ -47,7 +50,8 @@ angular.module('AngularScaffold.Controllers')
         };
 
       }
-          }).catch(function(err){
+      $scope.item= {};
+      }).catch(function(err){
       alert('Error fetching products')
     });
   };

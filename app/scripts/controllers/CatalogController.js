@@ -20,7 +20,6 @@ angular.module('AngularScaffold.Controllers')
       current_user : $scope.$sessionStorage.currentUser
     }
     UserService.add_bought_item(object).then(function(response){
-      console.log(response.data)
     }).catch(function(err){
       alert('Error adding product')
     });

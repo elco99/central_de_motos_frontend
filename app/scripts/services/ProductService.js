@@ -1,8 +1,8 @@
 angular.module('AngularScaffold.Services').factory('ProductService', ['$http',
 	function($http){
 		$http.defaults.withCredentials = true;
-		var baseUrl = 'http://localhost:8000/';
-		//var baseUrl = 'https://centraldemotosbackend.herokuapp.com/';
+		//var baseUrl = 'http://localhost:8000/';
+		var baseUrl = 'https://centraldemotosbackend.herokuapp.com/';
 		return {
 			GetAllProduct: function(){
 				return $http.get(baseUrl + 'v1/product');

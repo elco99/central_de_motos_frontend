@@ -1,9 +1,9 @@
 angular.module('AngularScaffold.Services').factory('UserService', ['$http',
 	function($http){
 		$http.defaults.withCredentials = true;
+		//var baseUrl = 'http://localhost:8000/';
+	 	var baseUrl = 'https://centraldemotosbackend.herokuapp.com/';
 
-		var baseUrl = 'http://localhost:8000/';
-		//var baseUrl = 'https://centraldemotosbackend.herokuapp.com/';
 		return {
 			GetUsers: function(){
 				return $http.get(baseUrl + "v1/users");

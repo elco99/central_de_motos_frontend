@@ -11,18 +11,19 @@ angular.module('AngularScaffold.Controllers')
 /*  var doc = new jsPDF('p', 'pt');
   */
 
-  $scope.generate = function() {//descargar pdf
-    var columns = ["codigo","nombre","cantidad", "precio"]
-    var rows = [];
-    for (var i = 0; i < $scope.products.length; i++) {
-      var rowItem = [
-        $scope.products[i].code,
-        $scope.products[i].name,
-        $scope.products[i].quantity,
-        $scope.products[i].price*$scope.products[i].quantity
-      ]
-      rows.push(rowItem)
-    }
+
+$scope.generate = function() {//descargar pdf
+  var columns = ["codigo","nombre","cantidad", "precio"]
+  var rows = [];
+  for (var i = 0; i < $scope.products.length; i++) {
+    var rowItem = [
+      $scope.products[i].code,
+      $scope.products[i].name,
+      $scope.products[i].quantity,
+      $scope.products[i].price*$scope.products[i].quantity
+    ]
+    rows.push(rowItem)
+  }
     var specialElementHandlers = {
       '#editor' : function(element, renderer){
         return true;
@@ -134,6 +135,7 @@ angular.module('AngularScaffold.Controllers')
         };
 
       }
+      $scope.item = {};
       $scope.putSubTotal();
     }).catch(function(err){
       alert('Error fetching products')
