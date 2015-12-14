@@ -103,6 +103,10 @@ $scope.generate = function() {//descargar pdf
     });
   }
 
+  $scope.remove_from_factura = function(product){
+     $scope.products.splice($scope.products.indexOf(product),1);
+  }
+
 
   $scope.fill_shopping_cart = function(){
 
