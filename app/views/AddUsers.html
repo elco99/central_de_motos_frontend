@@ -25,29 +25,29 @@
                     <div class="tab-pane fade active in" id="agregarProduct">
                         <div class="row">
 					        <!-- Projects Row -->
-					        <div class="col-md-12 col-sm-12">
-					            <label>Nombre</label>
-					            <input ng-model="user.name" type="text" >
+					        <div class="row">
+					            <label class="col-md-3 col-sm-3 col-xs-3">Nombre</label>
+					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.name" type="text" >
 
 					        </div>
-					        <div class="col-md-12 col-sm-12">
-					            <label>Usuario</label>
-					            <input ng-model="user.username" type="text" ></input>
+					        <div class="row">
+					            <label class="col-md-3 col-sm-3 col-xs-3">Usuario</label>
+					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.username" type="text" ></input>
 					        </div>
-					        <div class="col-md-12 col-sm-12">
-					            <label>Contraseña</label>
-					            <input ng-model="user.password" type="text" ></input>
+					        <div class="row">
+					            <label class="col-md-3 col-sm-3 col-xs-3">Contraseña</label>
+					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.password" type="text" ></input>
 					        </div>
-					        <div class="col-md-12 col-sm-12">
-					            <label>Email</label>
-					            <input ng-model="user.email" type="text" ></input>
+					        <div class="row">
+					            <label class="col-md-3 col-sm-3 col-xs-3">Email</label>
+					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.email" type="text" ></input>
 					        </div>
-					        <div class="col-md-12 col-sm-12">
-				            	<label>Tipo</label>
-				            	<input ng-model="user.scope" type="text"></input>
+					        <div class="row">
+				            	<label class="col-md-3 col-sm-3 col-xs-3">Tipo</label>
+				            	<input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.scope" type="text"></input>
 				        	</div>
-				        	<div class="col-md-12 col-sm-12">
-				        		<button ng-click="postUsers()" class="btn btn-danger">Agregar</button>
+				        	<div class="row">
+				        		<button class="col-md-3 col-sm-3 col-xs-3" ng-click="postUsers()" class="btn btn-danger">Agregar</button>
 					        </div>
 					    </div >
                     </div>
@@ -63,9 +63,6 @@
 						        </th>
 						        <th>
 						          Usuario
-						        </th>
-						        <th>
-						          Contraseña
 						        </th>
 						        <th>
 						          Email
@@ -90,9 +87,6 @@
 						      		<input ng-model="userModif.username"  type = "text"> </input>
 						      	</td>
 						      	<td>
-						      		<input ng-model="userModif.password" type = "text"> </input>
-						      	</td>
-						      	<td>
 						      		<input ng-model="userModif.email" type = "text"> </input>
 						      	</td>
 						      	<td>
@@ -114,9 +108,6 @@
 						        </td>
 						        <td>
 						          {{user.username}}
-						        </td>
-						        <td>
-						          {{user.password}}
 						        </td>
 						        <td>
 						          {{user.email}}
