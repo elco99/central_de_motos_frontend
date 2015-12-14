@@ -62,7 +62,7 @@ angular.module('AngularScaffold.Controllers')
     $scope.userModif.username = user.username;
     $scope.userModif.password = user.password;
     $scope.userModif.email = user.email;
-    $scope.userModif.type = user.type;
+    $scope.userModif.scope = user.scope ;
     if (user.state == true) {
       $scope.userModif.state = "true";
     }else{

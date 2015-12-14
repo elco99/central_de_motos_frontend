@@ -1,7 +1,7 @@
 angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 	function($http){
 		$http.defaults.withCredentials = true;
-		var baseUrl = 'https://centraldemotosbackend.herokuapp.com/';//http://localhost:8000/
+		var baseUrl = 'http://localhost:8000/';//https://centraldemotosbackend.herokuapp.com/
 		return {
 			GetUsers: function(){
 				return $http.get(baseUrl + "v1/users");
@@ -77,12 +77,6 @@ angular.module('AngularScaffold.Services').factory('HomeService', ['$http',
 			},
 			remove_from_cart: function(payload){
 				return $http.post(baseUrl + 'v1/shopping_cart/delete_item',payload);
-			},
-			updateReturnProductBuy:function(payload){
-				return $http.put(baseUrl + 'v1/admin/devolucionCompra',payload);
-			},
-			updateReturnProductSell:function(payload){
-				return $http.put(baseUrl + 'v1/admin/devolucionVenta',payload);
 			},
 			add_bought_item: function(payload){
 				return $http.post(baseUrl +'v1/shoppin_cart/add',payload);

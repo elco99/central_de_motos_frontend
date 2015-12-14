@@ -25,29 +25,29 @@
                     <div class="tab-pane fade active in" id="agregarProduct">
                         <div class="row">
 					        <!-- Projects Row -->
-					        <div class="row">
+					        <div class="row rowAddUsers">
 					            <label class="col-md-3 col-sm-3 col-xs-3">Nombre</label>
 					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.name" type="text" >
 
 					        </div>
-					        <div class="row">
+					        <div class="row rowAddUsers">
 					            <label class="col-md-3 col-sm-3 col-xs-3">Usuario</label>
 					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.username" type="text" ></input>
 					        </div>
-					        <div class="row">
+					        <div class="row rowAddUsers">
 					            <label class="col-md-3 col-sm-3 col-xs-3">Contraseña</label>
-					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.password" type="text" ></input>
+					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.password" type="password" ></input>
 					        </div>
-					        <div class="row">
+					        <div class="row rowAddUsers">
 					            <label class="col-md-3 col-sm-3 col-xs-3">Email</label>
 					            <input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.email" type="text" ></input>
 					        </div>
-					        <div class="row">
+					        <div class="row rowAddUsers">
 				            	<label class="col-md-3 col-sm-3 col-xs-3">Tipo</label>
 				            	<input class="col-md-3 col-sm-3 col-xs-3" ng-model="user.scope" type="text"></input>
 				        	</div>
-				        	<div class="row">
-				        		<button class="col-md-3 col-sm-3 col-xs-3" ng-click="postUsers()" class="btn btn-danger">Agregar</button>
+				        	<div class="row rowAddUsers">
+				        		<button id="ButtonCreateUser" ng-click="postUsers()" class="btn btn-danger">Agregar</button>
 					        </div>
 					    </div >
                     </div>
@@ -90,7 +90,7 @@
 						      		<input ng-model="userModif.email" type = "text"> </input>
 						      	</td>
 						      	<td>
-						      		<input ng-model="userModif.type" class="input_gestion_productos" type = "text"> </input>
+						      		<input ng-model="userModif.scope" class="input_gestion_productos" type = "text"> </input>
 						      	</td>
 						      	<td>
 						      		<input ng-model="userModif.state" class="input_gestion_productos" type = "text"> </input>
@@ -113,7 +113,7 @@
 						          {{user.email}}
 						        </td>
 						        <td>
-						          {{user.type}}
+						          {{user.scope}}
 						        </td>
 						        <td>
 						          {{user.state}}
