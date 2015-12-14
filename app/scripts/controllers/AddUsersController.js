@@ -80,3 +80,4 @@ angular.module('AngularScaffold.Controllers')
   };
 
 }]);
+
