@@ -1,5 +1,5 @@
 angular.module('AngularScaffold.Controllers')
- .controller('DevolucionController', ['$scope', 'HomeService','$state','$sessionStorage', function ($scope, HomeService,$state,$sessionStorage) {
+ .controller('DevolucionController', ['$scope', 'ProductService','$state','$sessionStorage', function ($scope, ProductService,$state,$sessionStorage) {
   $scope.products = [];
   $scope.producto = {};
   $scope.$sessionStorage = $sessionStorage;
@@ -9,16 +9,16 @@ angular.module('AngularScaffold.Controllers')
   $scope.total = 0;
   $scope.showModal = false;
 
-  
+
   $scope.updateItem = function(product){
     if ($scope.radio_return === "Compra") {
-      HomeService.updateReturnProductBuy(product).then(function(response){
+      ProductService.updateReturnProductBuy(product).then(function(response){
         alert("Se devolvio exitosamente!")
       }).catch(function(err){
 
       });
     }else{
-      HomeService.updateReturnProductSell(product).then(function(response){
+      ProductService.updateReturnProductSell(product).then(function(response){
         alert("Se devolvio exitosamente!")
       }).catch(function(err){
 
@@ -27,7 +27,7 @@ angular.module('AngularScaffold.Controllers')
   }
 
   $scope.addItem = function(){
-    HomeService.AddItem($scope.item.ingreso).then(function(response){
+    ProductService.AddItem($scope.item.ingreso).then(function(response){
 
       var cont = -1;
       for (var i = $scope.products.length-1; i>= 0; i--) {
@@ -60,9 +60,9 @@ angular.module('AngularScaffold.Controllers')
   $scope.IncreaseItem = function(product){
     product.currentAmount += 1;
   };
-  
+
   $scope.clearItem = function(product){
     $scope.products.splice($scope.products.indexOf(product),1);
   };
-  
+
 }]);

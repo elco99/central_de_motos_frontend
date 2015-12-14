@@ -1,5 +1,5 @@
 angular.module('AngularScaffold.Controllers')
- .controller('AddUsersController', ['$scope', 'HomeService','$state','$sessionStorage', function ($scope, HomeService,$state,$sessionStorage) {
+ .controller('AddUsersController', ['$scope', 'UserService','$state','$sessionStorage', function ($scope, UserService,$state,$sessionStorage) {
 	$scope.users = [];
 	$scope.user = {};
 	$scope.userModif = {};
@@ -23,7 +23,7 @@ angular.module('AngularScaffold.Controllers')
   };
 
   $scope.goService = function(){
-      $state.go('services');
+    $state.go('services');
   };
 
   $scope.goAbout = function(){
@@ -41,7 +41,7 @@ angular.module('AngularScaffold.Controllers')
   };
 
 	$scope.getUsers = function(){
-		HomeService.GetUsers().then(function(response){
+		UserService.GetUsers().then(function(response){
   		$scope.users = response.data;
   	}).catch(function(err){
   		alert('Error fetching users')
@@ -49,7 +49,7 @@ angular.module('AngularScaffold.Controllers')
 	};
 
 	$scope.postUsers = function(){
-		HomeService.PostUsers($scope.user).then(function(response){
+		UserService.PostUsers($scope.user).then(function(response){
 	    alert("Creado Exitosamente");
 	}).catch(function(err){
 	    alert("Error posting to users");
@@ -72,7 +72,7 @@ angular.module('AngularScaffold.Controllers')
   };
 
   $scope.saveUserChanges = function(){
-    HomeService.SaveUserChanges($scope.userModif).then(function(response){
+    UserService.SaveUserChanges($scope.userModif).then(function(response){
       $scope.users = response.data;
 
     }).catch(function(err){
