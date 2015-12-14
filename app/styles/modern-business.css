@@ -8,8 +8,15 @@
 #buttonCreateProduct{
 	margin-left: 0.25%;
 }
+#ButtonCreateUser{
+    margin-left: 0.25%;
+}
 .rowAddProductos{
 	margin-top:0.5%;
+}
+.rowAddUsers{
+    margin-top:0.5%;
+    margin-left: 0.4%;
 }
 .cart_image{
 	text-align: center;

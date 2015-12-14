@@ -23,7 +23,6 @@ $scope.generate = function() {//descargar pdf
     ]
     rows.push(rowItem)
   }
-  console.log(rows)
   var specialElementHandlers = {
     '#editor' : function(element, renderer){
       return true;
@@ -138,6 +137,7 @@ $scope.generate = function() {//descargar pdf
         };
 
       }
+      $scope.item = {};
       $scope.putSubTotal();
     }).catch(function(err){
       alert('Error fetching products')

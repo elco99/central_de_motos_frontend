@@ -18,16 +18,16 @@ angular.module('AngularScaffold.Controllers')
     }else{
       $scope.productoModif.state = "false";
     };
-
   };
 
   $scope.saveProductChanges = function(){
     HomeService.SaveChanges($scope.productoModif).then(function(response){
-      $scope.products = response.data;
-
+      $scope.productoModif = {} 
     }).catch(function(err){
     });
   };
+
+  
 
   $scope.getFetch=function(){
     HomeService.fetchGet().then(function(response){
@@ -40,6 +40,7 @@ angular.module('AngularScaffold.Controllers')
   $scope.createProduct = function(){
     HomeService.AddProduct($scope.producto).then(function(response){
     $scope.products = response.data;
+    $scope.producto = {};
   }).catch(function(err){
       alert(err + "     " + "Error creating product");
     });
