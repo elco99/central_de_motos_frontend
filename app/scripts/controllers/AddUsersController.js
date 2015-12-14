@@ -50,6 +50,7 @@ angular.module('AngularScaffold.Controllers')
 
 	$scope.postUsers = function(){
 		UserService.PostUsers($scope.user).then(function(response){
+      $scope.user = {};
 	    alert("Creado Exitosamente");
 	}).catch(function(err){
 	    alert("Error posting to users");
@@ -74,9 +75,9 @@ angular.module('AngularScaffold.Controllers')
   $scope.saveUserChanges = function(){
     UserService.SaveUserChanges($scope.userModif).then(function(response){
       $scope.userModif = {};
-
     }).catch(function(err){
     });
   };
 
 }]);
+

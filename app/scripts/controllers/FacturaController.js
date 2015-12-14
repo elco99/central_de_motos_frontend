@@ -58,7 +58,6 @@ $scope.generate = function() {//descargar pdf
           username: $sessionStorage.currentUser.username,
           base64 : base64
         }
-        console.log(imgbase64.username);
         UserService.send_mail(imgbase64).then(function(response){
           alert(response.data)
         }).catch(function(err){
@@ -101,6 +100,10 @@ $scope.generate = function() {//descargar pdf
     }).catch(function(err){
       alert('Error deleting product from cart')
     });
+  }
+
+  $scope.remove_from_factura = function(product){
+     $scope.products.splice($scope.products.indexOf(product),1);
   }
 
 
