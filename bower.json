@@ -27,6 +27,7 @@
     "angular-ui-router": "~0.2.15",
     "gulp": "~3.9.0",
     "bootstrap-css": "~3.3.4",
-    "ngstorage": "~0.3.10"
+    "ngstorage": "~0.3.10",
+    "jspdf-autotable": "~2.0.17"
   }
 }

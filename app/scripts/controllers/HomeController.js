@@ -63,8 +63,8 @@ angular.module('AngularScaffold.Controllers')
     };
     $scope.logout = function(){
       HomeService.Logout().then(function(response){
-        alert('logged out correctly');
         $sessionStorage.$reset();
+        $scope.goHome();
       }).catch(function(err){
         alert(err.data.error + " " + err.data.message);
       })

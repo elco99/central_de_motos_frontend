@@ -5,6 +5,25 @@
  */
 
 /* Global Styles */
+#buttonCreateProduct{
+	margin-left: 0.25%;
+}
+.rowAddProductos{
+	margin-top:0.5%;
+}
+.cart_image{
+	text-align: center;
+}
+#uploadImg{
+	margin-top: 3%;
+	margin-bottom: 3%;
+}
+.botones_shopping{
+	margin-bottom: 2%;
+}
+#totales{
+	margin-right : 13%;
+}
 #username{
 	margin-bottom: 15px;
 }
