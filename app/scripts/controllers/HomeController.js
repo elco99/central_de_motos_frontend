@@ -83,10 +83,9 @@ angular.module('AngularScaffold.Controllers')
     $scope.login = function(){
       UserService.Login($scope.user).then(function(response){
         $sessionStorage.currentUser = response.data;
-        console.log(  $sessionStorage.currentUser);
         $scope.SessionCurrentUser = {};
       }).catch(function(err){
-        alert(err.data.error + " " + err.data.message);
+        alert("No se pudo conectar")
       });
     }
 
