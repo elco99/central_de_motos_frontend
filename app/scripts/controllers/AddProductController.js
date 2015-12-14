@@ -22,6 +22,7 @@ angular.module('AngularScaffold.Controllers')
 
   $scope.saveProductChanges = function(){
     ProductService.SaveChanges($scope.productoModif).then(function(response){
+      $scope.products = response.data;
       $scope.productoModif = {}
     }).catch(function(err){
     });
