@@ -1,5 +1,5 @@
 angular.module('AngularScaffold.Controllers')
- .controller('CatalogController', ['$scope', 'HomeService','$state','$stateParams', '$sessionStorage', function ($scope, HomeService,$state,$stateParams, $sessionStorage) {
+ .controller('CatalogController', ['$scope', 'UserService','ProductService','$state','$stateParams', '$sessionStorage', function ($scope, UserService,ProductService,$state,$stateParams, $sessionStorage) {
   $scope.products = [];
   $scope.producto = {};
   $scope.$sessionStorage = $sessionStorage;
@@ -9,7 +9,7 @@ angular.module('AngularScaffold.Controllers')
     $scope.description = $state.params.content.description;
     $scope.price = $state.params.content.price;
   }
- $scope.item = {};
+  $scope.item = {};
 
 
 
@@ -19,7 +19,7 @@ angular.module('AngularScaffold.Controllers')
       item : product,
       current_user : $scope.$sessionStorage.currentUser
     }
-    HomeService.add_bought_item(object).then(function(response){
+    UserService.add_bought_item(object).then(function(response){
     }).catch(function(err){
       alert('Error adding product')
     });
@@ -35,7 +35,7 @@ angular.module('AngularScaffold.Controllers')
   };
 
   $scope.getCatalogo = function(){
-    HomeService.GetAllProduct().then(function(response){
+    ProductService.GetAllProduct().then(function(response){
       $scope.products = response.data;
     }).catch(function(err){
       alert('Error fetching users')

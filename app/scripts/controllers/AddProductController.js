@@ -1,5 +1,5 @@
 angular.module('AngularScaffold.Controllers')
- .controller('AddProductController', ['$scope', 'HomeService','$state','$sessionStorage', function ($scope, HomeService,$state,$sessionStorage) {
+ .controller('AddProductController', ['$scope', 'ProductService','$state','$sessionStorage', function ($scope, ProductService,$state,$sessionStorage) {
   $scope.products = [];
   $scope.producto = {};
   $scope.productoModif = {};
@@ -21,16 +21,16 @@ angular.module('AngularScaffold.Controllers')
   };
 
   $scope.saveProductChanges = function(){
-    HomeService.SaveChanges($scope.productoModif).then(function(response){
-      $scope.productoModif = {} 
+    ProductService.SaveChanges($scope.productoModif).then(function(response){
+      $scope.productoModif = {}
     }).catch(function(err){
     });
   };
 
-  
+
 
   $scope.getFetch=function(){
-    HomeService.fetchGet().then(function(response){
+    ProductService.fetchGet().then(function(response){
       $scope.products = response.data;
     }).catch(function(err){
       alert('Error fetching products')
@@ -38,7 +38,7 @@ angular.module('AngularScaffold.Controllers')
   };
 
   $scope.createProduct = function(){
-    HomeService.AddProduct($scope.producto).then(function(response){
+    ProductService.AddProduct($scope.producto).then(function(response){
     $scope.products = response.data;
     $scope.producto = {};
   }).catch(function(err){

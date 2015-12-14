@@ -1,5 +1,5 @@
 angular.module('AngularScaffold.Controllers')
- .controller('StatsController', ['$scope', 'HomeService','$state','$sessionStorage', function ($scope, HomeService,$state,$sessionStorage) {
+ .controller('StatsController', ['$scope', 'ProductService','$state','$sessionStorage', function ($scope, ProductService,$state,$sessionStorage) {
   $scope.products = [];
   $scope.producto = {};
   $scope.productoModif = {};
@@ -13,7 +13,7 @@ angular.module('AngularScaffold.Controllers')
     $scope.products = [];
     $scope.name_producto = [];
     $scope.cantidad_producto =[];
-    HomeService.fetchGet().then(function(response){
+    ProductService.fetchGet().then(function(response){
       $scope.products = response.data;
       for (var i = 0; i<$scope.products.length; i++) {
           $scope.name_producto.push($scope.products[i].name);
@@ -22,9 +22,9 @@ angular.module('AngularScaffold.Controllers')
             $scope.bestSeller_name.push($scope.products[i].name);
             $scope.bestSeller_producto.push($scope.products[i].bestSeller);
           }
-          
+
       };
-      $scope.graficaInventario(); 
+      $scope.graficaInventario();
       $scope.graficaBestSeller();
     }).catch(function(err){
       alert('Error fetching productos')

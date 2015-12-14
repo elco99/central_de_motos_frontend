@@ -1,5 +1,5 @@
 angular.module('AngularScaffold.Controllers')
-  .controller('HomeController', ['HomeService', '$scope', '$rootScope','$state', '$sessionStorage',  function (HomeService, $scope, $rootScope,$state, $sessionStorage) {
+  .controller('HomeController', ['ProductService','UserService', '$scope', '$rootScope','$state', '$sessionStorage',  function (ProductService,UserService, $scope, $rootScope,$state, $sessionStorage) {
     $scope.SessionCurrentUser = {};
     $scope.$sessionStorage = $sessionStorage;
     $scope.users = [];
@@ -8,14 +8,13 @@ angular.module('AngularScaffold.Controllers')
     $scope.search_bar ={};
     $scope.products = [];
     $scope.producto = {};
-
+    $scope.contactMail = {};
     $scope.search=[];
     $scope.prueba = {};
   	/*$scope.show_login = true;
     $scope.show_logout = false;
     $scope.show_shopping_cart = false;
     $scope.show_bill= false;*/
-
     if($state.params.content){
       $scope.prueba = $state.params.content.searched_value;
       $scope.imageName = $state.params.content.image;
@@ -23,9 +22,16 @@ angular.module('AngularScaffold.Controllers')
       $scope.description = $state.params.content.description;
       $scope.price = $state.params.content.price;
     }
+    $scope.ContactSendMail = function(){
+      UserService.contact_mail($scope.contactMail).then(function(response){
 
+      }).catch(function(err){
+        alert(err.data.error + " " + err.data.message);
+      })
+    }
     $scope.goHome = function(){
       $state.go('home');
+
     };
 
     $scope.goDevolucion = function(){
@@ -66,7 +72,7 @@ angular.module('AngularScaffold.Controllers')
       $state.go('adminUsers');
     };
     $scope.logout = function(){
-      HomeService.Logout().then(function(response){
+      UserService.Logout().then(function(response){
         $sessionStorage.$reset();
         $scope.goHome();
       }).catch(function(err){
@@ -75,8 +81,9 @@ angular.module('AngularScaffold.Controllers')
     }
 
     $scope.login = function(){
-      HomeService.Login($scope.user).then(function(response){
+      UserService.Login($scope.user).then(function(response){
         $sessionStorage.currentUser = response.data;
+        console.log(  $sessionStorage.currentUser);
         $scope.SessionCurrentUser = {};
       }).catch(function(err){
         alert(err.data.error + " " + err.data.message);
@@ -84,11 +91,11 @@ angular.module('AngularScaffold.Controllers')
     }
 
     $scope.aceptarDeposito = function(user){
-      HomeService.aceptar_deposito(user).then(function(response){
-          HomeService.sendConfirmationMail(user).then(function(response){
-            HomeService.reduceInventory(user).then(function(response){
-              HomeService.deleteCart(user).then(function(response){
-
+      UserService.aceptar_deposito(user).then(function(response){
+          UserService.sendConfirmationMail(user).then(function(response){
+            ProductService.reduceInventory(user).then(function(response){
+              UserService.deleteCart(user).then(function(response){
+                $state.reload();
               }).catch(function(err){
                 alert('Error from deleting cart')
               });
@@ -103,23 +110,21 @@ angular.module('AngularScaffold.Controllers')
       }).catch(function(err){
 
       });
-      $state.reload();
     }
     $scope.denegarDeposito = function(user){
-      HomeService.aceptar_deposito(user).then(function(response){
-          HomeService.sendDenialMail(user).then(function(response){
-
+      UserService.aceptar_deposito(user).then(function(response){
+          UserService.sendDenialMail(user).then(function(response){
+            $state.reload();
           }).catch(function(err){
             alert('Error from mail')
           });
-          $state.reload();
       }).catch(function(err){
 
       });
     }
 
     $scope.confirmationTable = function(){
-      HomeService.getDepositedUsers().then(function(response){
+      UserService.getDepositedUsers().then(function(response){
         $scope.users = response.data;
       }).catch(function(err){
         alert(err.data.error + " " + err.data.message);
@@ -127,7 +132,7 @@ angular.module('AngularScaffold.Controllers')
     }
 
     $scope.loadSearched=function(){
-      HomeService.searchByTag($scope.prueba).then(function(response){
+      ProductService.searchByTag($scope.prueba).then(function(response){
         $scope.search = response.data;
       if ($scope.search.length === 0) {
         alert("No existe")

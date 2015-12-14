@@ -1,5 +1,5 @@
 angular.module('AngularScaffold.Controllers')
- .controller('FacturaController', ['$scope', 'HomeService','$state','$sessionStorage', function ($scope, HomeService,$state,$sessionStorage) {
+ .controller('FacturaController', ['$scope', 'ProductService', 'UserService','$state','$sessionStorage', function ($scope, ProductService,UserService,$state,$sessionStorage) {
   $scope.products = [];
   $scope.producto = {};
   $scope.$sessionStorage = $sessionStorage;
@@ -10,6 +10,7 @@ angular.module('AngularScaffold.Controllers')
   $scope.shopping_cart_total =  0;
 /*  var doc = new jsPDF('p', 'pt');
   */
+
 
 $scope.generate = function() {//descargar pdf
   var columns = ["codigo","nombre","cantidad", "precio"]
@@ -23,25 +24,25 @@ $scope.generate = function() {//descargar pdf
     ]
     rows.push(rowItem)
   }
-  var specialElementHandlers = {
-    '#editor' : function(element, renderer){
-      return true;
-    }
+    var specialElementHandlers = {
+      '#editor' : function(element, renderer){
+        return true;
+      }
+    };
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows);
+    doc.fromHTML($('#fecha_cart').get(0), 0 ,5 , {
+      'width':180,
+      'elementHandlers' : specialElementHandlers
+
+    });
+    doc.fromHTML($('#totales').get(0),50 ,25*($scope.products.length+2), {
+      'width':180,
+      'elementHandlers' : specialElementHandlers
+
+    });
+    doc.save('cotizacion.pdf');
   };
-  var doc = new jsPDF('p', 'pt');
-  doc.autoTable(columns, rows);
-  doc.fromHTML($('#fecha_cart').get(0), 0 ,5 , {
-    'width':180,
-    'elementHandlers' : specialElementHandlers
-
-  });
-  doc.fromHTML($('#totales').get(0),50 ,25*($scope.products.length+2), {
-    'width':180,
-    'elementHandlers' : specialElementHandlers
-
-  });
-  doc.save('table.pdf');
-};
 
   $scope.uploadImage = function(){
 
@@ -54,10 +55,11 @@ $scope.generate = function() {//descargar pdf
         binary = reader.result;
         base64 = btoa(binary);
         var imgbase64 = {
+          username: $sessionStorage.currentUser.username,
           base64 : base64
         }
-        //$scope.sendM()
-        HomeService.send_mail(imgbase64).then(function(response){
+        console.log(imgbase64.username);
+        UserService.send_mail(imgbase64).then(function(response){
           alert(response.data)
         }).catch(function(err){
           alert('Error from cart')
@@ -65,26 +67,22 @@ $scope.generate = function() {//descargar pdf
       }, false);
 
 
-      HomeService.updateDeposited($scope.$sessionStorage.currentUser).then(function(response){
+      UserService.updateDeposited($scope.$sessionStorage.currentUser).then(function(response){
         alert(response.data)
       }).catch(function(err){
         alert('Error from cart')
       });
-        reader.readAsBinaryString(img);
-    /*
-      reader.readAsBinaryString(img);*/
-
-
+      reader.readAsBinaryString(img);
    }
-   $scope.wasBought = function(){
 
+   $scope.wasBought = function(){
      return  $sessionStorage.currentUser.bought_cart;
    }
 
 
    $scope.habilitar_upload_image = function() {
 
-     HomeService.updateBought($scope.$sessionStorage.currentUser).then(function(response){
+     UserService.updateBought($scope.$sessionStorage.currentUser).then(function(response){
         $scope.$sessionStorage.currentUser.bought_cart = true;
         alert(response.data)
       }).catch(function(err){
@@ -96,7 +94,7 @@ $scope.generate = function() {//descargar pdf
       username : $scope.$sessionStorage.currentUser.username,
       product_code : product.code
     }
-    HomeService.remove_from_cart(params).then(function(response){
+    UserService.remove_from_cart(params).then(function(response){
      $scope.products.splice($scope.products.indexOf(product),1);
      $scope.putSubTotal();
      $scope.shopping_cart_subtotal();
@@ -108,7 +106,7 @@ $scope.generate = function() {//descargar pdf
 
   $scope.fill_shopping_cart = function(){
 
-    HomeService.fill_cart($scope.$sessionStorage.currentUser).then(function(response){
+    UserService.fill_cart($scope.$sessionStorage.currentUser).then(function(response){
         $scope.products = response.data.cart;
         $scope.shopping_cart_subtotal();
 
@@ -117,7 +115,7 @@ $scope.generate = function() {//descargar pdf
     });
   }
   $scope.addItem = function(){
-    HomeService.AddItem($scope.item.ingreso).then(function(response){
+    ProductService.AddItem($scope.item.ingreso).then(function(response){
 
       var cont = -1;
       for (var i = $scope.products.length-1; i>= 0; i--) {
@@ -187,7 +185,7 @@ $scope.generate = function() {//descargar pdf
       $scope.products[i].quantity = $scope.products[i].quantity - $scope.products[i].currentAmount;
     };
     for (var i = $scope.products.length - 1; i >= 0; i--) {
-      HomeService.ChangeSoldProduct($scope.products[i]).then(function(response){
+      ProductService.ChangeSoldProduct($scope.products[i]).then(function(response){
         $scope.products = response.data;
         if ($scope.products.quantity <= 0) {
           HomeService.NoMoreItems($scope.products).then(function(response){
