@@ -7,12 +7,42 @@ angular.module('AngularScaffold.Controllers')
   $scope.factura = {};
   $scope.total = 0;
   $scope.showModal = false;
+  $scope.shopping_cart_total =  0;
+/*  var doc = new jsPDF('p', 'pt');
+  */
 
-	$scope.show_login = true;
-  $scope.show_logout = false;
-  $scope.show_shopping_cart = false;
-  $scope.show_admin = true;
-  $scope.show_bill= false;
+$scope.generate = function() {//descargar pdf
+  var columns = ["codigo","nombre","cantidad", "precio"]
+  var rows = [];
+  for (var i = 0; i < $scope.products.length; i++) {
+    var rowItem = [
+      $scope.products[i].code,
+      $scope.products[i].name,
+      $scope.products[i].quantity,
+      $scope.products[i].price*$scope.products[i].quantity
+    ]
+    rows.push(rowItem)
+  }
+  console.log(rows)
+  var specialElementHandlers = {
+    '#editor' : function(element, renderer){
+      return true;
+    }
+  };
+  var doc = new jsPDF('p', 'pt');
+  doc.autoTable(columns, rows);
+  doc.fromHTML($('#fecha_cart').get(0), 0 ,5 , {
+    'width':180,
+    'elementHandlers' : specialElementHandlers
+
+  });
+  doc.fromHTML($('#totales').get(0),50 ,25*($scope.products.length+2), {
+    'width':180,
+    'elementHandlers' : specialElementHandlers
+
+  });
+  doc.save('table.pdf');
+};
 
   $scope.uploadImage = function(){
 
@@ -48,7 +78,7 @@ angular.module('AngularScaffold.Controllers')
 
    }
    $scope.wasBought = function(){
-     console.log($sessionStorage.currentUser)
+
      return  $sessionStorage.currentUser.bought_cart;
    }
 
@@ -68,20 +98,21 @@ angular.module('AngularScaffold.Controllers')
       product_code : product.code
     }
     HomeService.remove_from_cart(params).then(function(response){
-      alert(response.data)
+     $scope.products.splice($scope.products.indexOf(product),1);
+     $scope.putSubTotal();
+     $scope.shopping_cart_subtotal();
     }).catch(function(err){
       alert('Error deleting product from cart')
     });
-     $scope.products.splice($scope.products.indexOf(product),1);
-     $scope.putSubTotal();
   }
 
 
   $scope.fill_shopping_cart = function(){
-    console.log($scope.$sessionStorage.currentUser)
+
     HomeService.fill_cart($scope.$sessionStorage.currentUser).then(function(response){
         $scope.products = response.data.cart;
-        console.log($scope.products)
+        $scope.shopping_cart_subtotal();
+
     }).catch(function(err){
       alert('Error fetching products')
     });
@@ -138,6 +169,14 @@ angular.module('AngularScaffold.Controllers')
     };
       $scope.factura.subtotal = contador;
   };
+
+  $scope.shopping_cart_subtotal = function(){
+      var contador = 0;
+      for (var i = $scope.products.length - 1; i >= 0; i--) {
+        contador = contador + ($scope.products[i].price * $scope.products[i].quantity);
+      };
+        $scope.shopping_cart_total = contador;
+    };
 
   $scope.CancelAll = function(){
     $state.reload();

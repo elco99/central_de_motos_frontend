@@ -8,7 +8,7 @@
                 </li>
                 <li class="active">Gestionar Productos</li>
             </ol>
-            
+
         </div>
          <!-- Service Tabs -->
         <div class="row">
@@ -23,40 +23,40 @@
 
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade active in" id="agregarProduct">
-                        <div class="row">
-					        <!-- Projects Row -->
-					        <div class="col-md-12 col-sm-12">
-					            <label>URL Imagen</label>
-					            <input ng-model="producto.image" type="text" >
-					        </div>
-					        <div class="col-md-12 col-sm-12">
-					            <label>Codigo</label>
-					            <input ng-model="producto.code" type="text" >
-					        </div>
-					        <div class="col-md-12 col-sm-12">
-					            <label>Nombre</label>
-					            <input ng-model="producto.name" type="text" ></input>
-					        </div>
-					        <div class="col-md-12 col-sm-12">
-					            <label>Descripción</label>
-					            <input ng-model="producto.description" type="text" ></input>
-					        </div>
-					        <div class="col-md-12 col-sm-12">
-					            <label>Tags</label>
-					            <input ng-model="producto.tags" type="text" ></input>
-					        </div>
-					        <div class="col-md-12 col-sm-12">
-				            	<label>Precio</label>
-				            	<input ng-model="producto.price" type="number" min="1"></input>
-				        	</div>
-				        	<div class="col-md-12 col-sm-12">
-					            <label>Cantidad</label>
-					            <input ng-model="producto.quantity" type="number" min="0"></input>
-				        	</div>
-				        	<div class="col-md-12 col-sm-12">
-				        		<button ng-click="createProduct()" class="btn btn-danger">Agregar</button>
-					        </div>
-					    </div >
+                        <div >
+        					        <!-- Projects Row -->
+        					        <div class="row rowAddProductos">
+        					            <label class = "col-md-3 col-sm-3 col-xs-3">URL Imagen</label>
+        					            <input class = "col-md-3 col-sm-3 col-xs-3" ng-model="producto.image" type="text" >
+        					        </div>
+        					        <div class="row rowAddProductos">
+        					            <label class = "col-md-3 col-sm-3 col-xs-3">Codigo</label>
+        					            <input class = "col-md-3 col-sm-3 col-xs-3" ng-model="producto.code" type="text" >
+        					        </div>
+        					        <div class="row rowAddProductos">
+        					            <label class = "col-md-3 col-sm-3 col-xs-3">Nombre</label>
+        					            <input  class = "col-md-3 col-sm-3 col-xs-3" ng-model="producto.name" type="text" ></input>
+        					        </div>
+        					        <div class="row rowAddProductos">
+        					            <label class = "col-md-3 col-sm-3 col-xs-3">Descripción</label>
+        					            <input class = "col-md-3 col-sm-3 col-xs-3" ng-model="producto.description" type="text" ></input>
+        					        </div>
+        					        <div class="row rowAddProductos">
+        					            <label class = "col-md-3 col-sm-3 col-xs-3">Tags</label>
+        					            <input class = "col-md-3 col-sm-3 col-xs-3" ng-model="producto.tags" type="text" ></input>
+        					        </div>
+        					        <div class="row rowAddProductos">
+        				            	<label class = "col-md-3 col-sm-3 col-xs-3">Precio</label>
+        				            	<input class = "col-md-3 col-sm-3 col-xs-3" ng-model="producto.price" type="number" min="1"></input>
+        				        	</div>
+        				        	<div class="row rowAddProductos">
+        					            <label class = "col-md-3 col-sm-3 col-xs-3">Cantidad</label>
+        					            <input class = "col-md-3 col-sm-3 col-xs-3" ng-model="producto.quantity" type="number" min="0"></input>
+        				        	</div>
+        				        	<div id = "buttonCreateProduct"class="rowAddProductos">
+        				        		<button ng-click="createProduct()" class="btn btn-danger">Agregar</button>
+        					        </div>
+        					    </div >
                     </div>
                     <div class="tab-pane fade" id="modificarProduct">
                     	<div class = "container">
@@ -154,16 +154,16 @@
 						        </td>
 						        <td>
 						          <button ng-click="show_modificar(product)" class="btn btn-danger">Modificar</button>
-						          
+
 						        </td>
 						      </tr>
-						    </table>   
-						</div>                     
+						    </table>
+						</div>
                     </div>
-                    
+
                 </div>
 
             </div>
         </div>
-        
+
 </div>

@@ -1,7 +1,8 @@
 <div ng-controller="HomeController" ng-init= "loadSearched()" class="container">
     <!-- Service Panels -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <div class="row">
+    <div class="row" ng-controller ="CatalogController">
+
         <!-- Page Heading/Breadcrumbs -->
         <div class="col-lg-12">
             <h1 class="page-header">Productos</h1>
@@ -17,16 +18,27 @@
                 <img ng-click="goDetail(n.image, n.name,n.description, n.price)" class ="fotoProducto" id="Foto" src={{n.image}}></img>
                 <div class="panel-heading">
 
-                    <a class="btn btn-link" ng-click="goDetail(n.image, n.name,n.description, n.price)">{{n.name}}</a>
+                    <a   class="btn btn-link" ng-click="goDetail(n.image, n.name,n.description, n.price)">{{n.name}}</a>
 
-                    <h3>Precio: {{n.price}}</h3>
+                    <h3 >Precio: {{n.price}}</h3>
                     <div>
-                        <input type="number" min='1' max={{n.quantity}} value = "1"></input>
-                        <button class= "btn btn-danger glyphicon glyphicon-shopping-cart"></button>
+                        <button ng-click="LowerItem(n)" class="botonesFactura btn glyphicon glyphicon-menu-down"></button>
+                        <input readonly="" type="number" value={{n.currentAmount}} min="1" max={{n.quantity}} id="facturaCantidad"></input>
+                        <button ng-click="IncreaseItem(n)" class="botonesFactura btn glyphicon glyphicon-menu-up"></button>
+                        <!--<input  id ="item_amount" type="number" min='1' max={{n.quantity}} ></input> -->
+                        <span ng-click ="add_to_cart(n)" class ="btn btn-danger ">Add to cart
+                          <label ng-cloak ng-show ="isCliente()"
+                                  class= "glyphicon glyphicon-shopping-cart"
+
+                                  ></label>
+                        </span>
+
                     </div>
                 </div>
             </div>
         </div>
+
+        <hr>
 
       </div><!--end of rows-->
 
