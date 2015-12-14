@@ -15,6 +15,10 @@
 #BotonCancelar{
     margin-left: 1%;
 }
+.grafica_style{
+    margin: auto;
+    width:100%;
+}
 .FacturaCentrado{
     text-align: center;
 }
