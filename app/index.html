@@ -52,7 +52,7 @@
                     <div class="pull-right">
                       <form class="navbar-form" role="search">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-model="search_bar.tags" placeholder="write your shit here" name="srch-term" id="srch-term">
+                            <input type="text" class="form-control" ng-model="search_bar.tags" placeholder="Busqueda..." name="srch-term" id="srch-term">
                             <div class="input-group-btn">
                                 <button class="btn btn-danger" type="submit" ng-click="searchByTags(search_bar)"><i class="glyphicon glyphicon-search"></i></button>
                             </div>
@@ -83,6 +83,9 @@
                           </li>
                           <li>
                               <a class="btn" ng-click="goGestionVentas()">Gestión de Ventas</a>
+                          </li>
+                          <li>
+                              <a class="btn" ng-click="goDevolucion()">Devoluciones</a>
                           </li>
                           <li>
                               <a class="btn" ng-click="goFactura()">Factura</a>
@@ -148,6 +151,7 @@
 
   <!-- inject:js -->
   <script src="scripts/controllers/HomeController.js"></script>
+  <script src="scripts/controllers/DevolucionController.js"></script>
   <script src="scripts/controllers/AddProductController.js"></script>
   <script src="scripts/controllers/CatalogController.js"></script>
   <script src="scripts/controllers/AddUsersController.js"></script>
