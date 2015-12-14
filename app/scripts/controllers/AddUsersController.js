@@ -49,6 +49,7 @@ angular.module('AngularScaffold.Controllers')
 	};
 
 	$scope.postUsers = function(){
+    console.log($scope.user)
 		UserService.PostUsers($scope.user).then(function(response){
 	    alert("Creado Exitosamente");
 	}).catch(function(err){
