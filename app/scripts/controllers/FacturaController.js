@@ -12,18 +12,18 @@ angular.module('AngularScaffold.Controllers')
   */
 
 
-$scope.generate = function() {//descargar pdf
-  var columns = ["codigo","nombre","cantidad", "precio"]
-  var rows = [];
-  for (var i = 0; i < $scope.products.length; i++) {
-    var rowItem = [
-      $scope.products[i].code,
-      $scope.products[i].name,
-      $scope.products[i].quantity,
-      $scope.products[i].price*$scope.products[i].quantity
-    ]
-    rows.push(rowItem)
-  }
+  $scope.generate = function() {//descargar pdf
+    var columns = ["codigo","nombre","cantidad", "precio"]
+    var rows = [];
+    for (var i = 0; i < $scope.products.length; i++) {
+      var rowItem = [
+        $scope.products[i].code,
+        $scope.products[i].name,
+        $scope.products[i].quantity,
+        $scope.products[i].price*$scope.products[i].quantity
+      ]
+      rows.push(rowItem)
+    }
     var specialElementHandlers = {
       '#editor' : function(element, renderer){
         return true;
@@ -50,13 +50,24 @@ $scope.generate = function() {//descargar pdf
       img = elm.files[0],
       filename = img.name,
       filesize = img.size;
-      var reader = new FileReader(),binary,base64     ;
+      var reader = new FileReader(),binary,base64;
+      var prodList = "Lista de articulos comprados en formato { codigo // nombre // cantidad // precio}\n"
+      var subtotal = 0;
+      for (var i = 0; i < $scope.products.length; i++) {
+        prodList = prodList + "{ "+ $scope.products[i].code + " // " + $scope.products[i].name+ " // " + $scope.products[i].quantity + " // " +
+        $scope.products[i].price*$scope.products[i].quantity + " }\n";
+        subtotal = subtotal + ($scope.products[i].price*$scope.products[i].quantity)
+      }
+
+      prodList = prodList + "\n subtotal: " + subtotal+"\n IVS:"+ subtotal*0.15 + "\n Total: " + ((subtotal*0.15)+subtotal)
+      console.log(prodList)
       reader.addEventListener('loadend', function(){
         binary = reader.result;
         base64 = btoa(binary);
         var imgbase64 = {
           username: $sessionStorage.currentUser.username,
-          base64 : base64
+          base64 : base64,
+          itemList : prodList
         }
         UserService.send_mail(imgbase64).then(function(response){
           alert(response.data)
@@ -64,14 +75,13 @@ $scope.generate = function() {//descargar pdf
           alert('Error from cart')
         });
       }, false);
-
-
       UserService.updateDeposited($scope.$sessionStorage.currentUser).then(function(response){
         alert(response.data)
       }).catch(function(err){
         alert('Error from cart')
       });
       reader.readAsBinaryString(img);
+
    }
 
    $scope.wasBought = function(){
@@ -80,7 +90,6 @@ $scope.generate = function() {//descargar pdf
 
 
    $scope.habilitar_upload_image = function() {
-
      UserService.updateBought($scope.$sessionStorage.currentUser).then(function(response){
         $scope.$sessionStorage.currentUser.bought_cart = true;
         alert(response.data)
