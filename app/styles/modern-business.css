@@ -11,6 +11,13 @@
 #ButtonCreateUser{
     margin-left: 0.25%;
 }
+.admindrop{
+    background-color: #222222;
+}
+#letra1,#letra2,#letra3,
+#letra4,#letra5,#letra6{
+    color: gray;
+}
 .rowAddProductos{
 	margin-top:0.5%;
 }
